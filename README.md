@@ -5,4 +5,5 @@ Features of this database:
  - Easy to learn, easy to use.
  - Open source.
  - Can query the database with ease. 
+<br>
 Built using the power of hashmaps(or dictionaries).
