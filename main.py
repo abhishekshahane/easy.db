@@ -30,13 +30,27 @@ class db:
             print("Name not set, set with __setname__")
     def set_var(self, path, var):
         #In progress
-        self.path = path
-        self.var = var
-    def all(self):
-        print(self.db)
+        #format:  path = "var"
+        #path = db.obj.var = value
+        #path = key, var = value
+        try:
+            self.name
+            self.path = path
+            self.var = var
+            ar = self.path.split(".")
+            #ar[1] is obj, ar[2] is var       
+            get_obj = ar[1]         
+            var_insert = ar[2]
+            self.file.seek(0)
+            self.file.truncate()
+            self.db[get_obj][var_insert] = self.var
+            pickle.dump(self.db, self.file)
+            print("Sucessfully inserted into the database {}.".format(self.name))
+            
+        except AttributeError:
+            print("Name not set, set with __setname__")
 
-db = db()
-db.__setname__("Bob")
-db.add("test")
-db.all()
+
+    def all(self):
+        return self.db
 
