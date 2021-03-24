@@ -55,7 +55,6 @@ class db:
     def remove_obj(self, remove_path_2):
         """
         removing an object is very simple in easy.db, all you have to do is provide the remove_path, which consists of db.obj
-        In progress
         """
         self.remove_path_2 = remove_path_2
         ar = self.remove_path_2.split(".")
