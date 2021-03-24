@@ -1,5 +1,11 @@
 import pickle
 import os
+def file_delete(file):
+    file.seek(0)
+    file.truncate()
+def file_write(db, file):
+    pickle.dump(db, file)
+
 class db:
     def __init__(self):
         #lists all things in the directory
@@ -28,6 +34,28 @@ class db:
         #gets rid of attributeerror saying name doesn't exist
         except AttributeError:
             print("Name not set, set with __setname__")
+    def remove_key(self, remove_path):
+        #removes 
+        #db.obj.key
+        self.remove_path = remove_path
+        ar = self.remove_path.split('.')
+        try:
+            if self.name:
+                o = ar[1]
+                ke = ar[2]
+                try:
+                    del self.db[o][ke]
+                    print("Sucessfully removed from {}".format(self.name))
+                    file_delete(self.file)
+                    file_write(self.db, self.file)
+                except KeyError:
+                    print("Key doesn't exist in {}.".format(self.name))
+        except AttributeError:
+            print("Name not set, set with __setname__")
+    def remove_obj(self, remove_path_2):
+        """
+        removing an object is very simple in easy.db, all you have to do is provide the remove_path, which consists of the 
+        """
     def set_var(self, path, var):
         #In progress
         #format:  path = "var"
@@ -53,4 +81,3 @@ class db:
 
     def all(self):
         return self.db
-
