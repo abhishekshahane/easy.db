@@ -1,10 +1,6 @@
 import pickle
 import os
-def file_delete(file):
-    file.seek(0)
-    file.truncate()
-def file_write(db, file):
-    pickle.dump(db, file)
+from helpers import file_delete, file_write
 
 class db:
     def __init__(self):
