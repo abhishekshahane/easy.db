@@ -33,7 +33,7 @@ class db:
                 pickle.dump(self.db, self.file)
         #gets rid of attributeerror saying name doesn't exist
         except AttributeError:
-            print("Name not set, set with __setname__")
+            print("Name not set, set with __setname__.")
     def remove_key(self, remove_path):
         #removes 
         #db.obj.key
@@ -45,7 +45,7 @@ class db:
                 ke = ar[2]
                 try:
                     del self.db[o][ke]
-                    print("Sucessfully removed from {}".format(self.name))
+                    print("Sucessfully removed from {}.".format(self.name))
                     file_delete(self.file)
                     file_write(self.db, self.file)
                 except KeyError:
@@ -65,7 +65,7 @@ class db:
             file_write(self.db, self.file)
 
         except KeyError:
-            print("Object doesn't exist in {}".format(self.name))
+            print("Object doesn't exist in {}.".format(self.name))
 
     def set_var(self, path, var):
         #format:  path = "var"
@@ -79,6 +79,9 @@ class db:
             #ar[1] is obj, ar[2] is var       
             get_obj = ar[1]         
             var_insert = ar[2]
+            if (get_obj not in self.db):
+                print("Object not found in {}, set it.". format(self.name))
+                return
             self.file.seek(0)
             self.file.truncate()
             self.db[get_obj][var_insert] = self.var
@@ -86,7 +89,7 @@ class db:
             print("Sucessfully inserted into the database {}.".format(self.name))
             
         except AttributeError:
-            print("Name not set, set with __setname__")
+            print("Name not set, set with __setname__.")
 
 
     def all(self):
