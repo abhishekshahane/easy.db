@@ -8,4 +8,7 @@ db.add("baseball_scores")
 db.set_var("db.baseball_scores.Bob", 75)
 db.add("names")
 db.set_var("db.names.Arthur", 1)
+db.remove_key("db.names.Arthur")
+db.set_var("db.names.Arthur", 1)
+
 print(db.all())

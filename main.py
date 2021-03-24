@@ -49,15 +49,26 @@ class db:
                     file_delete(self.file)
                     file_write(self.db, self.file)
                 except KeyError:
-                    print("Key doesn't exist in {}.".format(self.name))
+                    print("Key (or object) doesn't exist in {}.".format(self.name))
         except AttributeError:
             print("Name not set, set with __setname__")
     def remove_obj(self, remove_path_2):
         """
-        removing an object is very simple in easy.db, all you have to do is provide the remove_path, which consists of the 
+        removing an object is very simple in easy.db, all you have to do is provide the remove_path, which consists of db.obj
+        In progress
         """
+        self.remove_path_2 = remove_path_2
+        ar = self.remove_path_2.split(".")
+        ob = ar[1]
+        try:
+            del self.db[ob]
+            file_delete(self.file)
+            file_write(self.db, self.file)
+
+        except KeyError:
+            print("Object doesn't exist in {}".format(self.name))
+
     def set_var(self, path, var):
-        #In progress
         #format:  path = "var"
         #path = db.obj.var = value
         #path = key, var = value
