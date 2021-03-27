@@ -11,5 +11,8 @@ db.remove_key("db.names.Arthur")
 db.set_var("db.names.Arthur", 1)
 #We haven't created an object with add, so this will give us an error
 db.set_var("db.e.e", "e")
+#prints two times
+a = db.query("db.baseball_scores")
+print(a)
 
 print(db.all())

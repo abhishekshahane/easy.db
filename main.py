@@ -1,6 +1,6 @@
 import pickle
 import os
-from helpers import file_delete, file_write
+from helpers import file_delete, file_write, obj_query
 
 class db:
     def __init__(self):
@@ -83,9 +83,20 @@ class db:
             self.db[get_obj][var_insert] = self.var
             pickle.dump(self.db, self.file)
             print("Sucessfully inserted into the database {}.".format(self.name))
-            
+        
         except AttributeError:
             print("Name not set, set with __setname__.")
+    def query(self, *args):
+    #obj = db.obj or db.obj.key
+        ar = [arg for arg in args]
+        if len(ar)!=1:
+            print("Pass in correct number of arguments!")
+            return
+        else:
+            if len(ar[0].split("."))==2:
+                return obj_query(self.db, ar[0]) 
+            elif len(ar[0].split("."))==3:
+                print("not implemented")
 
 
     def all(self):
