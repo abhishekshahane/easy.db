@@ -7,5 +7,9 @@ Features of this database:
  - Can query the database with ease. 
 <br>
 Built using the power of hashmaps(or dictionaries).
+<br>
 DB structure:
+<br>
 DB -> Object -> Key:Value
+<br>
+Docs: Coming soon!
