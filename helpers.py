@@ -9,4 +9,4 @@ def obj_query(db, path):
     try:
         return db[ar[1]]
     except KeyError:
-        print("Object not in db")
+        raise KeyError("Object not in db")

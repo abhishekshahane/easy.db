@@ -1,13 +1,14 @@
 import pickle
 import os
+# Helper function imports. 
 from helpers import file_delete, file_write, obj_query
 
-# Specific function imports
+# Specific function imports.
 from advanced_query import advanced_query
-
+# Creating a class for all of the database.
 class db:
     def __init__(self):
-        #lists all things in the directory
+        # Lists all things in the directory.
         arr = os.listdir()
         self.db = {}
         if 'data.dict' in arr:
@@ -20,22 +21,20 @@ class db:
             self.file = open("data.dict", "wb") 
     def __setname__(self, name):
         self.name = name    
-    #To add an object
+    # To add an object.
     def add(self, obj):
         self.obj = obj
         try:
             if self.name:
                 self.db[self.obj] = {}
-                #goes to the beginning of the file, deletes everything, and rewrites the file
-                self.file.seek(0)
-                self.file.truncate()
-                pickle.dump(self.db, self.file)
-        #gets rid of attributeerror saying name doesn't exist
+                # Goes to the beginning of the file, deletes everything, and rewrites the file.
+                file_delete(self.file)
+                file_write(self.db, self.file)
+        # Raises AttributeError, saying name doesn't exist.
         except AttributeError:
-            print("Name not set, set with __setname__.")
+            raise AttributeError("Name not set, set with __setname__.")
     def remove_key(self, remove_path):
-        #removes 
-        #db.obj.key
+        # Function to remove a key.
         self.remove_path = remove_path
         ar = self.remove_path.split('.')
         try:
@@ -44,16 +43,19 @@ class db:
                 ke = ar[2]
                 try:
                     del self.db[o][ke]
-                    print("Sucessfully removed from {}.".format(self.name))
+                    print(f"Sucessfully removed from {self.name}.")
                     file_delete(self.file)
                     file_write(self.db, self.file)
                 except KeyError:
-                    print("Key (or object) doesn't exist in {}.".format(self.name))
+                    raise KeyError(f"Key (or object) doesn't exist in {self.name}.")
         except AttributeError:
-            print("Name not set, set with __setname__")
+            raise AttributeError("Name not set, set with __setname__")
     def remove_obj(self, remove_path_2):
         """
-        removing an object is very simple in easy.db, all you have to do is provide the remove_path, which consists of db.obj
+        Removing an object is simple is easy.db.
+        Breakdown of remove_path_2:
+        - db.obj, where obj is the object.
+        That's it!
         """
         self.remove_path_2 = remove_path_2
         ar = self.remove_path_2.split(".")
@@ -64,39 +66,37 @@ class db:
             file_write(self.db, self.file)
 
         except KeyError:
-            print("Object doesn't exist in {}.".format(self.name))
+            raise KeyError(f"Object doesn't exist in {self.name}.")
 
     def set_var(self, path, var):
-        #format:  path = "var"
-        #path = db.obj.var = value
-        #path = key, var = value
+        # Sets a new object in the db.
         try:
             self.name
             self.path = path
             self.var = var
             ar = self.path.split(".")
-            #ar[1] is obj, ar[2] is var       
+            # ar[1] is obj, ar[2] is var       
             get_obj = ar[1]         
             var_insert = ar[2]
-            if (get_obj not in self.db):
-                print("Object not found in {}, set it.". format(self.name))
+            if get_obj not in self.db:
+                print(f"Object not found in {self.name}, set it.")
                 return
-            self.file.seek(0)
-            self.file.truncate()
+            file_delete(self.file)
             self.db[get_obj][var_insert] = self.var
+            file_write(self.db, self.file)
             pickle.dump(self.db, self.file)
-            print("Sucessfully inserted into the database {}.".format(self.name))
+            print(f"Sucessfully inserted into the database {self.name}.")
         
         except AttributeError:
-            print("Name not set, set with __setname__.")
+            raise AttributeError("Name not set, set with __setname__.")
     def query(self, *args):
-    #obj = db.obj or db.obj.key
+    # obj = db.obj or db.obj.key
         ar = [arg for arg in args]
 
-        if len(ar)>=2:
+        if len(ar) >= 2:
             results = self.adv_query(ar)
             return results
-        if len(ar)<1:
+        if len(ar) < 1:
             print("Pass in correct number of arguments!")
             return
         else:
@@ -108,6 +108,7 @@ class db:
     def adv_query(self, args):
         results = advanced_query(args, self.db)
         return results
+    
     
     def all(self):
         return self.db

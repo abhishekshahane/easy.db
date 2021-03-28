@@ -2,7 +2,6 @@ from main import db
 #tests go here
 #here, we are creating two new objects, baseball scores and names 
 db = db()
-db.__setname__("MyDB")
 db.add("baseball_scores")
 db.set_var("db.baseball_scores.Bob", 75)
 db.add("names")
