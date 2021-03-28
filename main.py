@@ -52,7 +52,7 @@ class db:
             raise AttributeError("Name not set, set with __setname__")
     def remove_obj(self, remove_path_2):
         """
-        Removing an object is simple is easy.db.
+        Removing an object is simple in easy.db.
         Breakdown of remove_path_2:
         - db.obj, where obj is the object.
         That's it!
