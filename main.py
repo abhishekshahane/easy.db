@@ -2,6 +2,9 @@ import pickle
 import os
 from helpers import file_delete, file_write, obj_query
 
+# Specific function imports
+from advanced_query import advanced_query
+
 class db:
     def __init__(self):
         #lists all things in the directory
@@ -89,15 +92,22 @@ class db:
     def query(self, *args):
     #obj = db.obj or db.obj.key
         ar = [arg for arg in args]
-        if len(ar)!=1:
+
+        if len(ar)>=2:
+            results = self.adv_query(ar)
+            return results
+        if len(ar)<1:
             print("Pass in correct number of arguments!")
             return
         else:
-            if len(ar[0].split("."))==2:
+            if len(ar[0].split(".")) == 2:
                 return obj_query(self.db, ar[0]) 
-            elif len(ar[0].split("."))==3:
+            elif len(ar[0].split(".")) == 3:
                 print("not implemented")
 
-
+    def adv_query(self, args):
+        results = advanced_query(args, self.db)
+        return results
+    
     def all(self):
         return self.db
