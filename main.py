@@ -7,6 +7,8 @@ from helpers import file_delete, file_write, obj_query
 from advanced_query import advanced_query
 # Creating a class for all of the database.
 class db:
+
+
     def __init__(self):
         # Lists all things in the directory.
         arr = os.listdir()
@@ -19,8 +21,12 @@ class db:
                 self.db = pickle.load(self.file)
         else:
             self.file = open("data.dict", "wb") 
+
+
     def __setname__(self, name):
         self.name = name    
+
+
     # To add an object.
     def add(self, obj):
         self.obj = obj
@@ -33,6 +39,8 @@ class db:
         # Raises AttributeError, saying name doesn't exist.
         except AttributeError:
             raise AttributeError("Name not set, set with __setname__.")
+
+
     def remove_key(self, remove_path):
         # Function to remove a key.
         self.remove_path = remove_path
@@ -50,6 +58,8 @@ class db:
                     raise KeyError(f"Key (or object) doesn't exist in {self.name}.")
         except AttributeError:
             raise AttributeError("Name not set, set with __setname__")
+
+
     def remove_obj(self, remove_path_2):
         """
         Removing an object is simple in easy.db.
@@ -67,6 +77,8 @@ class db:
 
         except KeyError:
             raise KeyError(f"Object doesn't exist in {self.name}.")
+
+
 
     def set_var(self, path, var):
         # Sets a new object in the db.
@@ -89,12 +101,13 @@ class db:
         
         except AttributeError:
             raise AttributeError("Name not set, set with __setname__.")
+
+
     def query(self, *args):
     # obj = db.obj or db.obj.key
         ar = [arg for arg in args]
-
         if len(ar) >= 2:
-            results = self.adv_query(ar)
+            results = advanced_query(args, self.db)
             return results
         if len(ar) < 1:
             print("Pass in correct number of arguments!")
@@ -105,10 +118,6 @@ class db:
             elif len(ar[0].split(".")) == 3:
                 print("not implemented")
 
-    def adv_query(self, args):
-        results = advanced_query(args, self.db)
-        return results
-    
-    
+
     def all(self):
         return self.db
