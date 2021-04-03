@@ -12,4 +12,11 @@ DB structure:
 <br>
 DB -> Object -> Key:Value
 <br>
-Docs: Coming soon!
+Documentation:
+`__setname__(name)` sets the name for the database. This is a required function, and must be set each time you <br> 
+run your code.
+<br>
+<br>
+`add(obj)` adds a object to the database. You must add an object using this function, before you call `set_var`(see below). 
+<br>
+<br>
