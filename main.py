@@ -1,7 +1,7 @@
 import pickle
 import os
 # Helper function imports. 
-from helpers import file_delete, file_write, obj_query
+from helpers import file_delete, file_write, obj_query, key_query
 
 # Specific function imports.
 from advanced_query import advanced_query
@@ -116,8 +116,6 @@ class db:
             if len(ar[0].split(".")) == 2:
                 return obj_query(self.db, ar[0]) 
             elif len(ar[0].split(".")) == 3:
-                print("not implemented")
-
-
+                return key_query(self.db, ar[0])
     def all(self):
         return self.db
