@@ -11,7 +11,7 @@ Built using the power of hashmaps(or dictionaries).
 <br>
 DB structure:
 <br>
-DB -> Object -> Key:Value
+DB → Object → Key : Value pair(s)
 <br>
 <br>
 Documentation:
