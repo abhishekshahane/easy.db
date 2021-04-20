@@ -24,3 +24,36 @@ Documentation:
  -  `set_var(path, var)` adds a key to the database in a object initialised with `add`(see above). Format: *path: db.obj.key*, *var = value*
  -  `query(path)` queries the database to find a object/key with a certain name. For advanced queries, pass in a extra parameter `query_args = ["STARTS" | "ENDS"] | "VALUE"` to query for keys/values. 
  -  `all()` returns everything in the database. 
+<br>
+An example of code using the module would be this:
+
+```python
+
+from main import db
+# tests go here
+# here, we are creating two new objects, baseball scores and names 
+
+db = db()
+# Setting the name for the database, VERY IMPORTANT!
+db.__setname__("Things")
+
+db.add("baseball_scores")
+db.set_var("db.baseball_scores.Bob", 75)
+
+db.add("names")
+db.set_var("db.names.Arthur", 1)
+db.remove_key("db.names.Arthur")
+
+db.set_var("db.names.Arthur", 1)
+# We haven't created an object with add, so this will give us an error
+
+db.set_var("db.e.e", "e")
+# prints one time - storing the result in a var, and then printing it
+
+a = db.query("db.baseball_scores.Bob")
+
+print(a)
+# All items from the db
+
+print(db.all())
+```
