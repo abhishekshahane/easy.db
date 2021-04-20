@@ -22,3 +22,5 @@ Documentation:
  -  `remove_key(remove_path)` removes a key from a particular object in the database, when provided with a remove_path. Format: db.obj.key
  -  `remove_obj(remove_path_2)` removes a object from the database. Format: db.obj
  -  `set_var(path, var)` adds a key to the database in a object initialised with `add`(see above). Format: *path: db.obj.key*, *var = value*
+ -  `query(path)` queries the database to find a object/key with a certain name. For advanced queries, pass in a extra parameter `query_args = ["STARTS" | "ENDS"] | "VALUE"` to query for keys/values. 
+ -  `all()` returns everything in the database. 
