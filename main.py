@@ -90,7 +90,7 @@ class db:
             get_obj = ar[1]         
             var_insert = ar[2]
             if get_obj not in self.db:
-                raise NameError("fObject not found in {self.name}, set it.")
+                raise NameError(f"Object not found in {self.name}, set it.")
                 return
             file_delete(self.file)
             self.db[get_obj][var_insert] = self.var
