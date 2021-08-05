@@ -51,7 +51,6 @@ class db:
                 ke = ar[2]
                 try:
                     del self.db[o][ke]
-                    print(f"Sucessfully removed from {self.name}.")
                     file_delete(self.file)
                     file_write(self.db, self.file)
                 except KeyError:
@@ -91,13 +90,12 @@ class db:
             get_obj = ar[1]         
             var_insert = ar[2]
             if get_obj not in self.db:
-                print(f"Object not found in {self.name}, set it.")
+                raise NameError("fObject not found in {self.name}, set it.")
                 return
             file_delete(self.file)
             self.db[get_obj][var_insert] = self.var
             file_write(self.db, self.file)
             pickle.dump(self.db, self.file)
-            print(f"Sucessfully inserted into the database {self.name}.")
         
         except AttributeError:
             raise AttributeError("Name not set, set with __setname__.")
@@ -110,7 +108,7 @@ class db:
             results = advanced_query(args, self.db)
             return results
         if len(ar) < 1:
-            print("Pass in correct number of arguments!")
+            raise AttributeError("Pass in correct number of arguments!")
             return
         else:
             if len(ar[0].split(".")) == 2:
