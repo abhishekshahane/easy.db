@@ -95,7 +95,6 @@ class db:
             file_delete(self.file)
             self.db[get_obj][var_insert] = self.var
             file_write(self.db, self.file)
-            pickle.dump(self.db, self.file)
         
         except AttributeError:
             raise AttributeError("Name not set, set with __setname__.")

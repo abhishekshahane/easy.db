@@ -17,6 +17,7 @@ db.set_var("db.names.Arthur", 1)
 db.remove_key("db.names.Arthur")
 db.set_var("db.names.Arthur", 1)
 
+
 # Tests
 class Tests(unittest.TestCase):
     def test_1(self):
